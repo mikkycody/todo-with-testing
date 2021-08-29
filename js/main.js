@@ -17,47 +17,39 @@ todoForm.addEventListener("submit", function (event) {
 
 // function to add todo
 function createTodo(item) {
-  // if item is not empty
+  // check if item is not empty
   if (item !== "") {
-    // make a todo object, which has id, name, and completed properties
     const todo = {
       id: Date.now(),
       name: item,
       completed: false,
     };
 
-    // then add it to todos array
+    // push it to todos array
     todos.push(todo);
-    addToLocalStorage(todos); // then store it in localStorage
+    addTodoItemToLocalStorage(todos); //  store the todo in localStorage
 
-    // finally clear the input box value
+    //reinitialize the todo input
     todoText.value = "";
   }
 }
 
-// function to render given todos to screen
-function renderTodos(todos) {
-  // clear everything inside <ul> with class=todo-items
+// function to display todos
+function displayTodos(todos) {
+  // reinitialize the todo list
   todoList.innerHTML = "";
 
-  // run through each item inside todos
+  // loop through each item in the todos
   todos.forEach(function (item) {
-    // check if the item is completed
+    // check if the todo item status is completed or not
     const checked = item.completed ? "checked" : null;
 
-    // make a <li> element and fill it
-    // <li> </li>
+    // create a list element
     const li = document.createElement("li");
-    // <li class="item"> </li>
+    // set attributes for the list items
     li.setAttribute("class", "item");
-    // <li class="item" data-key="20200708"> </li>
     li.setAttribute("data-key", item.id);
-    /* <li class="item" data-key="20200708"> 
-          <input type="checkbox" class="checkbox">
-          Go to Gym
-          <button class="delete-button">X</button>
-        </li> */
-    // if item is completed, then add a class to <li> called 'checked', which will add line-through style
+    // Add class to todo item if it is completed
     if (item.completed === true) {
       li.classList.add("checked");
     }
@@ -67,69 +59,62 @@ function renderTodos(todos) {
       ${item.name}
       <button class="delete-button">X</button>
     `;
-    // finally add the <li> to the <ul>
+    // append the <li> list to the <ul> tag
     todoList.append(li);
   });
 }
 
 // function to add todos to local storage
-function addToLocalStorage(todos) {
-  // conver the array to string then store it.
+function addTodoItemToLocalStorage(todos) {
+  // atringify the array
   localStorage.setItem("todos", JSON.stringify(todos));
-  // render them to screen
-  renderTodos(todos);
+  // display it to screen
+  displayTodos(todos);
 }
 
-// function helps to get everything from local storage
+// fetch from local storage
 function getFromLocalStorage() {
-  const reference = localStorage.getItem("todos");
-  // if reference exists
-  if (reference) {
-    // converts back to array and store it in todos array
-    todos = JSON.parse(reference);
-    renderTodos(todos);
+  const checkReference = localStorage.getItem("todos");
+  // if check if reference exists
+  if (checkReference) {
+    // converts back to array and store in todos array
+    todos = JSON.parse(checkReference);
+    displayTodos(todos);
   }
 }
 
-// toggle the value to completed and not completed
+// toggle to apecify if a todo is completed or not
 function toggle(id) {
   todos.forEach(function (item) {
-    // use == not ===, because here types are different. One is number and other is string
     if (item.id == id) {
-      // toggle the value
+      // negate the value(toggle)
       item.completed = !item.completed;
     }
   });
-
-  addToLocalStorage(todos);
+  addTodoItemToLocalStorage(todos);
 }
 
-// deletes a todo from todos array, then updates localstorage and renders updated list to screen
+// deletes a todo from todos array
 function deleteTodo(id) {
-  // filters out the <li> with the id and updates the todos array
   todos = todos.filter(function (item) {
-    // use != not !==, because here types are different. One is number and other is string
     return item.id != id;
   });
 
   // update the localStorage
-  addToLocalStorage(todos);
+  addTodoItemToLocalStorage(todos);
 }
 
-// initially get everything from localStorage
+// initially fetch items from localStorage
 getFromLocalStorage();
 
-// after that addEventListener <ul> with class=todoItems. Because we need to listen for click event in all delete-button and checkbox
 todoList.addEventListener("click", function (event) {
-  // check if the event is on checkbox
   if (event.target.type === "checkbox") {
-    // toggle the state
+    // change between the state
     toggle(event.target.parentElement.getAttribute("data-key"));
   }
 
   // check if that is a delete-button
   if (event.target.classList.contains("delete-button")) {
-    // get id from data-key attribute's value of parent <li> where the delete-button is present
     deleteTodo(event.target.parentElement.getAttribute("data-key"));
   }
 });
