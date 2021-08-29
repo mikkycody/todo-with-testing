@@ -55,9 +55,12 @@ function displayTodos(todos) {
     }
 
     li.innerHTML = `
-      <input type="checkbox" class="checkbox" ${checked}>
-      ${item.name}
-      <button class="delete-button">X</button>
+        <input type="checkbox" class="checkbox" ${checked}>
+        <b>${item.name}</b>
+        <button class="btn btn-danger delete-button ml-auto">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+          <hr/>
     `;
     // append the <li> list to the <ul> tag
     todoList.append(li);

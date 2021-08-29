@@ -1,0 +1,8 @@
+ body {
+    background: #cedff0 !important;
+    font-family: sharp-sans-bold, fallback-font, Arial, sans-serif !important;
+}
+
+ul {
+  list-style-type: none;
+}

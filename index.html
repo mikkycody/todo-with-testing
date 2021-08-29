@@ -6,24 +6,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Todo List App</title>
 </head>
 
 <body>
 
+    <nav class="navbar navbar-dark bg-dark mb-5">
+        <span class="navbar-brand mb-0 h1">My Todo App</span>
+    </nav>
     <div class="container">
-        <h1>Todo</h1>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card shadow-lg">
+                    <div class="row d-flex justify-content-center">
+                        <div class="m-3">
+                            <h3 class="text-center pb-2">Todo List</h3>
 
-        <form class="form">
-            <input type="text" class="todo-text" placeholder="Create a Todo">
-            <button type="submit" class="add-todo">+</button>
-        </form>
+                            <form class="form form-inline mb-3">
+                                <label class="sr-only" for="inlineFormInputName2">Add New Todo</label>
+                                <input type="text" class="todo-text form-control mb-2 mr-sm-2" placeholder="Add a Todo">
+                            
+                                <button type="submit" class="add-todo btn btn-primary mb-2">Add +</button>
+                            </form>
 
-        <ul class="todo-items">
-           
-        </ul>
+                        
+                            <h5 class="mb-4">My Todo List</h5>
+                            <ul class="todo-items p-0">
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
     <script type="text/javascript" src="js/main.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>
